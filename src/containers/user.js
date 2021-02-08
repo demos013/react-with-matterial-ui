@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useContext } from "react";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
 import { makeStyles } from "@material-ui/core/styles";
 import Album from "../components/Album";
@@ -13,6 +13,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
+import { Context } from "../store";
 
 const userSelectItem = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
@@ -60,11 +61,11 @@ const UserContainer = () => {
   const classes = useStyles();
 
   const [userData, setUserData] = useState([]);
-  const [size, setSize] = useState(10);
+  const [{ userSize }, dispatch] = useContext(Context);
 
   useEffect(() => {
-    fetchAdminList(size);
-  }, [size]);
+    fetchAdminList(userSize);
+  }, [userSize]);
 
   const fetchAdminList = useCallback(async (size = 10) => {
     const response = await getUserList({ results: size });
@@ -100,21 +101,23 @@ const UserContainer = () => {
           <div className={`${classes.selectBox}`}>
             <Select
               className={classes.select}
-              value={size}
+              value={userSize}
               onChange={({ target: { value } }) => {
-                setSize(value);
+                dispatch({ type: "SET_USER_SIZE", payload: value });
               }}
             >
               {userSelectItem.map((value) => (
-                <MenuItem value={value}>{value}</MenuItem>
+                <MenuItem key={value} value={value}>
+                  {value}
+                </MenuItem>
               ))}
             </Select>
           </div>
         </Container>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {userData.map((user) => (
-              <Album key={`${user?.name?.first}`} userData={user} />
+            {userData.map((user, index) => (
+              <Album key={`${user?.name?.first} ${index}`} userData={user} />
             ))}
           </Grid>
         </Container>
