@@ -34,13 +34,7 @@ const Album = ({ userData }) => {
     dob: { age },
   } = userData;
   return (
-    <Grid
-      item
-      key={Math.random().toString(36).substring(7)}
-      xs={12}
-      sm={6}
-      md={4}
-    >
+    <Grid item xs={12} sm={6} md={4}>
       <Card className={classes.card}>
         <CardMedia
           className={classes.cardMedia}

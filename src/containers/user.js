@@ -90,7 +90,7 @@ const UserContainer = () => {
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
             {userData.map((user) => (
-              <Album userData={user} />
+              <Album key={`${user?.name?.first}`} userData={user} />
             ))}
           </Grid>
         </Container>
