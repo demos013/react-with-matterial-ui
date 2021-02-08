@@ -10,20 +10,30 @@ import {
   Toolbar,
   Grid,
   CssBaseline,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const userSelectItem = [1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
-  heroContent: {
+  header: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
+  },
+  selectBox: {
+    paddingBottom: theme.spacing(1),
+    paddingTop: theme.spacing(1),
+    textAlign: "right",
+  },
+  select: {
+    fontSize: "2rem",
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -73,8 +83,7 @@ const UserContainer = () => {
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
+        <div className={classes.header}>
           <Container maxWidth="sm">
             <Typography
               component="h1"
@@ -87,6 +96,21 @@ const UserContainer = () => {
             </Typography>
           </Container>
         </div>
+        <Container maxWidth="md">
+          <div className={`${classes.selectBox}`}>
+            <Select
+              className={classes.select}
+              value={size}
+              onChange={({ target: { value } }) => {
+                setSize(value);
+              }}
+            >
+              {userSelectItem.map((value) => (
+                <MenuItem value={value}>{value}</MenuItem>
+              ))}
+            </Select>
+          </div>
+        </Container>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
             {userData.map((user) => (
