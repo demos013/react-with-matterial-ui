@@ -1,6 +1,6 @@
 Install it and run:
 
 ```sh
-yarn install
-yarn start
+npm install
+npm start
 ```
