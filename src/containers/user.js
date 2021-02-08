@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useContext } from "react";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
 import { makeStyles } from "@material-ui/core/styles";
 import Album from "../components/Album";
+import CopyRight from "../components/CopyRight";
 import { getUserList } from "../api/user";
 import {
   AppBar,
@@ -22,11 +23,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   header: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.secondary.main,
     padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
   },
   selectBox: {
     paddingBottom: theme.spacing(1),
@@ -34,7 +32,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "right",
   },
   select: {
+    color: theme.palette.primary.main,
     fontSize: "2rem",
+    "&:before": {
+      borderColor: theme.palette.primary.main,
+    },
+    "&:after": {
+      borderColor: theme.palette.primary.main,
+    },
+  },
+  icon: {
+    fill: theme.palette.primary.main,
   },
   cardGrid: {
     paddingTop: theme.spacing(8),
@@ -52,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   footer: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.secondary.main,
     padding: theme.spacing(6),
   },
 }));
@@ -73,13 +81,13 @@ const UserContainer = () => {
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
           <CameraIcon className={classes.icon} />
           <Typography variant="h6" color="inherit" noWrap>
-            Album layout
+            Album
           </Typography>
         </Toolbar>
       </AppBar>
@@ -90,17 +98,23 @@ const UserContainer = () => {
               component="h1"
               variant="h2"
               align="center"
-              color="textPrimary"
+              color="primary"
               gutterBottom
             >
-              Album layout
+              Album
             </Typography>
           </Container>
         </div>
         <Container maxWidth="md">
           <div className={`${classes.selectBox}`}>
             <Select
+              color="primary"
               className={classes.select}
+              inputProps={{
+                classes: {
+                  icon: classes.icon,
+                },
+              }}
               value={userSize}
               onChange={({ target: { value } }) => {
                 dispatch({ type: "SET_USER_SIZE", payload: value });
@@ -122,7 +136,21 @@ const UserContainer = () => {
           </Grid>
         </Container>
       </main>
-    </>
+      <footer className={classes.footer}>
+        <Typography color="primary" variant="h6" align="center" gutterBottom>
+          Footer
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="primary"
+          component="p"
+        >
+          Something here to give the footer a purpose!
+        </Typography>
+        <CopyRight />
+      </footer>
+    </React.Fragment>
   );
 };
 

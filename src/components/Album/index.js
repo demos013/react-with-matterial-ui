@@ -11,8 +11,9 @@ import {
   CardContent,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   card: {
+    backgroundColor: theme.palette.secondary.main,
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -22,6 +23,9 @@ const useStyles = makeStyles(() => ({
   },
   cardContent: {
     flexGrow: 1,
+  },
+  button: {
+    color: "#90caf9",
   },
 }));
 
@@ -42,16 +46,16 @@ const Album = ({ userData }) => {
           title="Image title"
         />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" color="primary">
             {`${first} ${last}`}
           </Typography>
-          <Typography>{`Gender: ${gender} | Age: ${age}`}</Typography>
+          <Typography color="primary">{`Gender: ${gender} | Age: ${age}`}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button className={classes.button} size="small">
             View
           </Button>
-          <Button size="small" color="primary">
+          <Button className={classes.button} size="small">
             Edit
           </Button>
         </CardActions>
