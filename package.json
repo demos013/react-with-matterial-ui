@@ -32,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/demos013/react-with-matterial-ui.git",
+  "author": "Demos <phuwadit.r@dv.co.th>",
+  "license": "MIT"
 }
